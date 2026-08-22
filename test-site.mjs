@@ -72,12 +72,18 @@ for (const locale of ["en", "pt", "es"]) {
 }
 
 const brandMarkup = html.match(/<a class="brand"[\s\S]*?<\/a>/)?.[0] ?? "";
+const primaryNavMarkup = html.match(/<nav id="primary-nav"[\s\S]*?<\/nav>/)?.[0] ?? "";
+const footerMarkup = html.match(/<footer class="site-footer"[\s\S]*?<\/footer>/)?.[0] ?? "";
 assert.ok(brandMarkup.includes('src="assets/trinity-grove-banner.png"'), "header brand must use the Trinity Grove banner");
 assert.ok(
   brandMarkup.includes('src="assets/trinity-grove-favicon.png"'),
   "header brand must include the compact mobile favicon"
 );
 assert.ok(!brandMarkup.includes("<span>"), "header banner must replace the duplicate text label");
+assert.ok(!primaryNavMarkup.includes("github.com/Trinity-Grove"), "GitHub must not appear in the primary navigation");
+assert.ok(footerMarkup.includes('class="footer-github"'), "footer must include the compact GitHub badge");
+assert.ok(footerMarkup.includes('aria-label="Trinity Grove on GitHub"'), "GitHub badge must have an accessible name");
+assert.ok(footerMarkup.includes("<svg"), "GitHub badge must use an icon without visible text");
 assert.ok(!html.includes("Covenant Grove"), "the former brand name must not remain in the page");
 assert.ok(!html.includes("github.com/Covenant-Grove"), "links must use the renamed GitHub organization");
 assert.ok(!html.includes("covenant-grove.github.io"), "metadata must use the renamed GitHub Pages domain");
@@ -86,5 +92,9 @@ assert.ok(html.includes('src="assets/aletheia-product-mockup.jpg"'), "Aletheia s
 assert.ok(html.includes('loading="lazy"'), "below-the-fold product image must load lazily");
 assert.match(css, /\.hero-art>img\{[^}]*height:auto/, "hero image height must scale with its width");
 assert.match(css, /\.eyebrow>span:last-child\{[^}]*width:auto[^}]*height:auto/, "translated eyebrow text must keep its natural size");
+assert.match(css, /\.footer-github\{[^}]*border-radius:50%/, "GitHub footer link must render as a circular badge");
+assert.match(css, /\.site-header\{[^}]*background:#fbf6ef/, "site header must match the banner background");
+assert.doesNotMatch(css, /\.site-header\{[^}]*background:rgba\(/, "site header must remain opaque while scrolling");
+assert.doesNotMatch(css, /\.site-header\{[^}]*backdrop-filter/, "opaque header must not apply backdrop blur");
 
 console.log("site contract: all checks passed");
