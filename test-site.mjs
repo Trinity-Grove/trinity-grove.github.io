@@ -13,6 +13,7 @@ const requiredFiles = [
   "assets/trinity-grove-family-learning.jpg",
   "assets/aletheia-product-mockup.jpg",
   ".nojekyll",
+  "CNAME",
 ];
 
 for (const file of requiredFiles) {
@@ -21,6 +22,7 @@ for (const file of requiredFiles) {
 
 const html = readFileSync(join(root, "index.html"), "utf8");
 const css = readFileSync(join(root, "assets/styles.css"), "utf8");
+const cname = readFileSync(join(root, "CNAME"), "utf8").trim();
 
 const { translations, resolveLanguage } = await import("./assets/i18n.js");
 
@@ -58,6 +60,9 @@ for (const fragment of [
 assert.ok(html.includes('name="description"'), "missing meta description");
 assert.ok(html.includes('property="og:title"'), "missing Open Graph title");
 assert.ok(html.includes('property="og:image"'), "missing Open Graph image");
+assert.equal(cname, "trinitygrove.org", "GitHub Pages must use the official custom domain");
+assert.ok(html.includes('property="og:url" content="https://trinitygrove.org/"'), "Open Graph URL must use the official domain");
+assert.ok(html.includes('property="og:image" content="https://trinitygrove.org/assets/trinity-grove-banner.png"'), "Open Graph image must use the official domain");
 assert.ok(html.includes('class="skip-link"'), "missing keyboard skip link");
 assert.ok(html.includes('aria-expanded="false"'), "missing accessible mobile navigation state");
 assert.ok(html.includes('class="language-switcher"'), "missing language switcher");
