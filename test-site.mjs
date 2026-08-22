@@ -10,6 +10,8 @@ const requiredFiles = [
   "assets/i18n.js",
   "assets/trinity-grove-banner.png",
   "assets/trinity-grove-favicon.png",
+  "assets/trinity-grove-family-learning.jpg",
+  "assets/aletheia-product-mockup.jpg",
   ".nojekyll",
 ];
 
@@ -68,5 +70,8 @@ assert.ok(
 );
 assert.ok(!brandMarkup.includes("<span>"), "header banner must replace the duplicate text label");
 assert.ok(!html.includes("Covenant Grove"), "the former brand name must not remain in the page");
+assert.ok(html.includes('src="assets/trinity-grove-family-learning.jpg"'), "hero must use the family learning illustration");
+assert.ok(html.includes('src="assets/aletheia-product-mockup.jpg"'), "Aletheia section must show the product mockup");
+assert.ok(html.includes('loading="lazy"'), "below-the-fold product image must load lazily");
 
 console.log("site contract: all checks passed");
