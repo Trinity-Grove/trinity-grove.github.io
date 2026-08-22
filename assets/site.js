@@ -1,4 +1,4 @@
-import { resolveLanguage, translations } from "./i18n.js";
+import { localizedAssets, resolveLanguage, translations } from "./i18n.js";
 
 const header = document.querySelector("[data-header]");
 const navToggle = document.querySelector(".nav-toggle");
@@ -34,6 +34,7 @@ const applyLanguage = (language) => {
   document.title = catalog["meta.title"];
   document.querySelector('meta[name="description"]')?.setAttribute("content", catalog["meta.description"]);
   document.querySelector('meta[property="og:description"]')?.setAttribute("content", catalog["footer.tagline"]);
+  document.querySelector("[data-product-mockup]")?.setAttribute("src", localizedAssets.productMockup[language]);
 
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     node.textContent = catalog[node.dataset.i18n];

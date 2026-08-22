@@ -12,6 +12,8 @@ const requiredFiles = [
   "assets/trinity-grove-favicon.png",
   "assets/trinity-grove-family-learning.jpg",
   "assets/aletheia-product-mockup.jpg",
+  "assets/aletheia-product-mockup-pt-br.jpg",
+  "assets/aletheia-product-mockup-es.jpg",
   ".nojekyll",
   "CNAME",
 ];
@@ -24,11 +26,14 @@ const html = readFileSync(join(root, "index.html"), "utf8");
 const css = readFileSync(join(root, "assets/styles.css"), "utf8");
 const cname = readFileSync(join(root, "CNAME"), "utf8").trim();
 
-const { translations, resolveLanguage } = await import("./assets/i18n.js");
+const { localizedAssets, translations, resolveLanguage } = await import("./assets/i18n.js");
 
 assert.equal(resolveLanguage("pt", ["en-US"]), "pt", "saved language must win");
 assert.equal(resolveLanguage(null, ["es-MX", "en"]), "es", "browser Spanish must be detected");
 assert.equal(resolveLanguage(null, ["fr-FR"]), "en", "unsupported languages must fall back to English");
+assert.equal(localizedAssets.productMockup.en, "assets/aletheia-product-mockup.jpg");
+assert.equal(localizedAssets.productMockup.pt, "assets/aletheia-product-mockup-pt-br.jpg");
+assert.equal(localizedAssets.productMockup.es, "assets/aletheia-product-mockup-es.jpg");
 
 const englishKeys = Object.keys(translations.en).sort();
 assert.ok(englishKeys.length >= 50, "the visible site content must be represented in the translation catalog");
@@ -91,7 +96,8 @@ assert.ok(!html.includes("Covenant Grove"), "the former brand name must not rema
 assert.ok(!html.includes("github.com/Covenant-Grove"), "links must use the renamed GitHub organization");
 assert.ok(!html.includes("covenant-grove.github.io"), "metadata must use the renamed GitHub Pages domain");
 assert.ok(html.includes('src="assets/trinity-grove-family-learning.jpg"'), "hero must use the family learning illustration");
-assert.ok(html.includes('src="assets/aletheia-product-mockup.jpg"'), "Aletheia section must show the product mockup");
+assert.ok(html.includes('data-product-mockup'), "Aletheia mockup must participate in language switching");
+assert.ok(html.includes('src="assets/aletheia-product-mockup.jpg"'), "Aletheia section must show the English product mockup by default");
 assert.ok(html.includes('loading="lazy"'), "below-the-fold product image must load lazily");
 assert.match(css, /\.hero-art>img\{[^}]*height:auto/, "hero image height must scale with its width");
 assert.match(css, /\.eyebrow>span:last-child\{[^}]*width:auto[^}]*height:auto/, "translated eyebrow text must keep its natural size");
