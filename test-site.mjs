@@ -74,6 +74,7 @@ for (const locale of ["en", "pt", "es"]) {
 const brandMarkup = html.match(/<a class="brand"[\s\S]*?<\/a>/)?.[0] ?? "";
 const primaryNavMarkup = html.match(/<nav id="primary-nav"[\s\S]*?<\/nav>/)?.[0] ?? "";
 const footerMarkup = html.match(/<footer class="site-footer"[\s\S]*?<\/footer>/)?.[0] ?? "";
+const closingMarkup = html.match(/<section id="contribute"[\s\S]*?<\/section>/)?.[0] ?? "";
 assert.ok(brandMarkup.includes('src="assets/trinity-grove-banner.png"'), "header brand must use the Trinity Grove banner");
 assert.ok(
   brandMarkup.includes('src="assets/trinity-grove-favicon.png"'),
@@ -84,6 +85,8 @@ assert.ok(!primaryNavMarkup.includes("github.com/Trinity-Grove"), "GitHub must n
 assert.ok(footerMarkup.includes('class="footer-github"'), "footer must include the compact GitHub badge");
 assert.ok(footerMarkup.includes('aria-label="Trinity Grove on GitHub"'), "GitHub badge must have an accessible name");
 assert.ok(footerMarkup.includes("<svg"), "GitHub badge must use an icon without visible text");
+assert.ok(!closingMarkup.includes("trinity-grove.github.io"), "closing call to action must not expose the site source");
+assert.ok(!closingMarkup.includes('class="closing-link"'), "closing section must contain only the valuable primary action");
 assert.ok(!html.includes("Covenant Grove"), "the former brand name must not remain in the page");
 assert.ok(!html.includes("github.com/Covenant-Grove"), "links must use the renamed GitHub organization");
 assert.ok(!html.includes("covenant-grove.github.io"), "metadata must use the renamed GitHub Pages domain");
