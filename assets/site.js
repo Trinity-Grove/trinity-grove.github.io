@@ -26,6 +26,7 @@ document.querySelectorAll("[data-year]").forEach((node) => {
 });
 
 const languageButtons = document.querySelectorAll("[data-language]");
+const languageStorageKey = "trinity-grove-language";
 
 const applyLanguage = (language) => {
   const catalog = translations[language];
@@ -49,11 +50,11 @@ const applyLanguage = (language) => {
   languageButtons.forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.language === language));
   });
-  localStorage.setItem("covenant-grove-language", language);
+  localStorage.setItem(languageStorageKey, language);
 };
 
 const initialLanguage = resolveLanguage(
-  localStorage.getItem("covenant-grove-language"),
+  localStorage.getItem(languageStorageKey) ?? localStorage.getItem("covenant-grove-language"),
   navigator.languages ?? [navigator.language]
 );
 applyLanguage(initialLanguage);
