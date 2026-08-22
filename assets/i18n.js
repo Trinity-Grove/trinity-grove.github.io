@@ -1,3 +1,11 @@
+export const localizedAssets = Object.freeze({
+  productMockup: Object.freeze({
+    en: "assets/aletheia-product-mockup.jpg",
+    pt: "assets/aletheia-product-mockup-pt-br.jpg",
+    es: "assets/aletheia-product-mockup-es.jpg"
+  })
+});
+
 export const translations = {
   en: {
     "meta.title": "Trinity Grove — Faithful learning, thoughtfully guided.",
