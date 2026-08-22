@@ -10,4 +10,10 @@
 .brand-banner{display:block;width:220px;height:auto;max-height:66px;object-fit:contain;object-position:left center;transition:width .25s}
 .site-header.scrolled .brand-banner{width:190px}
 .brand-icon{display:none;width:48px;height:48px;border-radius:50%!important;object-fit:cover}
+.language-switcher{display:flex;align-items:center;gap:3px;padding:3px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.48)}
+.language-switcher button{min-width:31px;height:28px;padding:0 7px;border:0;border-radius:999px;background:transparent;color:var(--muted);font:700 10px/1 var(--sans);letter-spacing:.05em;cursor:pointer;transition:background .2s,color .2s}
+.language-switcher button:hover{color:var(--forest)}
+.language-switcher button[aria-pressed="true"]{background:var(--forest);color:white}
+.language-switcher button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (max-width:900px){.language-switcher{justify-content:center;margin-top:4px;width:max-content}.primary-nav .language-switcher{align-self:flex-start}}
 @media (max-width:600px){.brand-banner{display:none}.brand-icon{display:block}}
