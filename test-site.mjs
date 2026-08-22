@@ -50,7 +50,7 @@ for (const fragment of [
   'id="ecosystem"',
   'id="contribute"',
   'aria-label="Primary navigation"',
-  'href="https://github.com/Covenant-Grove"',
+  'href="https://github.com/Trinity-Grove"',
 ]) {
   assert.ok(html.includes(fragment), `missing required content: ${fragment}`);
 }
@@ -74,6 +74,8 @@ assert.ok(
 );
 assert.ok(!brandMarkup.includes("<span>"), "header banner must replace the duplicate text label");
 assert.ok(!html.includes("Covenant Grove"), "the former brand name must not remain in the page");
+assert.ok(!html.includes("github.com/Covenant-Grove"), "links must use the renamed GitHub organization");
+assert.ok(!html.includes("covenant-grove.github.io"), "metadata must use the renamed GitHub Pages domain");
 assert.ok(html.includes('src="assets/trinity-grove-family-learning.jpg"'), "hero must use the family learning illustration");
 assert.ok(html.includes('src="assets/aletheia-product-mockup.jpg"'), "Aletheia section must show the product mockup");
 assert.ok(html.includes('loading="lazy"'), "below-the-fold product image must load lazily");
