@@ -93,5 +93,8 @@ assert.ok(html.includes('loading="lazy"'), "below-the-fold product image must lo
 assert.match(css, /\.hero-art>img\{[^}]*height:auto/, "hero image height must scale with its width");
 assert.match(css, /\.eyebrow>span:last-child\{[^}]*width:auto[^}]*height:auto/, "translated eyebrow text must keep its natural size");
 assert.match(css, /\.footer-github\{[^}]*border-radius:50%/, "GitHub footer link must render as a circular badge");
+assert.match(css, /\.site-header\{[^}]*background:#fbf6ef/, "site header must match the banner background");
+assert.doesNotMatch(css, /\.site-header\{[^}]*background:rgba\(/, "site header must remain opaque while scrolling");
+assert.doesNotMatch(css, /\.site-header\{[^}]*backdrop-filter/, "opaque header must not apply backdrop blur");
 
 console.log("site contract: all checks passed");
