@@ -47,6 +47,8 @@ assert.equal(translations.pt["brand.banner_alt"], "Trinity Grove — Aprendizado
 assert.equal(translations.en["hero.verse.ref"], "Proverbs 22:6 · NIV");
 assert.equal(translations.pt["hero.verse.ref"], "Provérbios 22:6 · NVI");
 assert.equal(translations.es["hero.verse.ref"], "Proverbios 22:6 · NVI");
+assert.equal(translations.pt["product.cta"], "Entrar na lista de interesse");
+assert.ok(translations.pt["faq.legal.answer"].includes("legislação local"));
 
 for (const fragment of [
   "Trinity Grove",
@@ -54,6 +56,11 @@ for (const fragment of [
   'id="vision"',
   'id="principles"',
   'id="aletheia"',
+  'id="journey"',
+  'id="audience"',
+  'id="status"',
+  'id="trust"',
+  'id="faq"',
   'id="ecosystem"',
   'id="contribute"',
   'aria-label="Primary navigation"',
@@ -69,6 +76,9 @@ assert.equal(cname, "trinitygrove.org", "GitHub Pages must use the official cust
 assert.ok(html.includes('property="og:url" content="https://trinitygrove.org/"'), "Open Graph URL must use the official domain");
 assert.ok(html.includes('property="og:image" content="https://trinitygrove.org/assets/trinity-grove-banner.png"'), "Open Graph image must use the official domain");
 assert.ok(html.includes('class="skip-link"'), "missing keyboard skip link");
+assert.equal((html.match(/https:\/\/forms\.gle\/PtSw6PpurXnZGvMx7/g) ?? []).length, 3, "interest form must be linked from all conversion points");
+assert.ok(html.includes('target="_blank" rel="noopener noreferrer"'), "external interest form must open safely");
+assert.equal((html.match(/<details>/g) ?? []).length, 5, "FAQ must contain five focused questions");
 assert.ok(html.includes('aria-expanded="false"'), "missing accessible mobile navigation state");
 assert.ok(html.includes('class="language-switcher"'), "missing language switcher");
 assert.ok(html.includes('data-i18n-alt="brand.banner_alt"'), "banner alternative text must be translated");
@@ -105,5 +115,7 @@ assert.match(css, /\.footer-github\{[^}]*border-radius:50%/, "GitHub footer link
 assert.match(css, /\.site-header\{[^}]*background:#fbf6ef/, "site header must match the banner background");
 assert.doesNotMatch(css, /\.site-header\{[^}]*background:rgba\(/, "site header must remain opaque while scrolling");
 assert.doesNotMatch(css, /\.site-header\{[^}]*backdrop-filter/, "opaque header must not apply backdrop blur");
+assert.match(css, /\.journey-grid\{[^}]*grid-template-columns:repeat\(5,1fr\)/, "learning journey must present five steps on wide screens");
+assert.match(css, /\.faq-list details\{[^}]*border-bottom/, "FAQ items must have a clear interactive layout");
 
 console.log("site contract: all checks passed");
