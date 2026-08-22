@@ -1,7 +1,7 @@
 # Trinity Grove website
 
 The institutional website for Trinity Grove, currently published at
-[covenant-grove.github.io](https://covenant-grove.github.io/).
+[trinity-grove.github.io](https://trinity-grove.github.io/).
 
 The legacy URL will be updated when the GitHub organization is renamed in the
 second phase of the rebrand.
