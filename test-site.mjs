@@ -49,6 +49,9 @@ assert.equal(translations.pt["hero.verse.ref"], "Provérbios 22:6 · NVI");
 assert.equal(translations.es["hero.verse.ref"], "Proverbios 22:6 · NVI");
 assert.equal(translations.pt["product.cta"], "Entrar na lista de interesse");
 assert.ok(translations.pt["faq.legal.answer"].includes("legislação local"));
+assert.equal(translations.en["faq.school.answer"], "No. Aletheia is an educational support platform for families, Christian educators, and communities.");
+assert.equal(translations.pt["faq.school.answer"], "Não. O Aletheia é uma plataforma de apoio educacional para famílias, educadores cristãos e comunidades.");
+assert.equal(translations.es["faq.school.answer"], "No. Aletheia es una plataforma de apoyo educativo para familias, educadores cristianos y comunidades.");
 
 for (const fragment of [
   "Trinity Grove",
