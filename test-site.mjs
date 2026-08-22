@@ -20,6 +20,7 @@ for (const file of requiredFiles) {
 }
 
 const html = readFileSync(join(root, "index.html"), "utf8");
+const css = readFileSync(join(root, "assets/styles.css"), "utf8");
 
 const { translations, resolveLanguage } = await import("./assets/i18n.js");
 
@@ -36,6 +37,9 @@ for (const locale of ["pt", "es"]) {
 assert.equal(translations.pt["hero.title"], "Aprender moldado pela <em>verdade, propósito</em> e família.");
 assert.equal(translations.es["nav.github"], "Explorar GitHub");
 assert.equal(translations.pt["brand.banner_alt"], "Trinity Grove — Aprendizado fiel, cuidadosamente guiado.");
+assert.equal(translations.en["hero.verse.ref"], "Proverbs 22:6 · NIV");
+assert.equal(translations.pt["hero.verse.ref"], "Provérbios 22:6 · NVI");
+assert.equal(translations.es["hero.verse.ref"], "Proverbios 22:6 · NVI");
 
 for (const fragment of [
   "Trinity Grove",
@@ -73,5 +77,7 @@ assert.ok(!html.includes("Covenant Grove"), "the former brand name must not rema
 assert.ok(html.includes('src="assets/trinity-grove-family-learning.jpg"'), "hero must use the family learning illustration");
 assert.ok(html.includes('src="assets/aletheia-product-mockup.jpg"'), "Aletheia section must show the product mockup");
 assert.ok(html.includes('loading="lazy"'), "below-the-fold product image must load lazily");
+assert.match(css, /\.hero-art>img\{[^}]*height:auto/, "hero image height must scale with its width");
+assert.match(css, /\.eyebrow>span:last-child\{[^}]*width:auto[^}]*height:auto/, "translated eyebrow text must keep its natural size");
 
 console.log("site contract: all checks passed");

@@ -25,3 +25,7 @@
 .product-visual img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;display:block}
 @media (max-width:900px){.product-visual{margin-top:0;margin-bottom:-20px}}
 @media (max-width:600px){.hero-art>img{aspect-ratio:4/3;object-position:62% center}.product-visual{margin-inline:-14px;border-radius:0}.product-visual img{aspect-ratio:4/3;object-position:center}}
+
+/* Keep intrinsic hero proportions and isolate the eyebrow's decorative line. */
+.hero-art>img{height:auto}
+.eyebrow>span:last-child{width:auto;height:auto;background:none}
