@@ -8,8 +8,8 @@ const requiredFiles = [
   "assets/styles.css",
   "assets/site.js",
   "assets/i18n.js",
-  "assets/covenant-grove-banner.jpg",
-  "assets/favicon.png",
+  "assets/trinity-grove-banner.png",
+  "assets/trinity-grove-favicon.png",
   ".nojekyll",
 ];
 
@@ -33,9 +33,10 @@ for (const locale of ["pt", "es"]) {
 
 assert.equal(translations.pt["hero.title"], "Aprender moldado pela <em>verdade, propósito</em> e família.");
 assert.equal(translations.es["nav.github"], "Explorar GitHub");
-assert.equal(translations.pt["brand.banner_alt"], "Covenant Grove — Aprendizado fiel, cuidadosamente guiado.");
+assert.equal(translations.pt["brand.banner_alt"], "Trinity Grove — Aprendizado fiel, cuidadosamente guiado.");
 
 for (const fragment of [
+  "Trinity Grove",
   "Faithful learning, thoughtfully guided.",
   'id="vision"',
   'id="principles"',
@@ -60,14 +61,12 @@ for (const locale of ["en", "pt", "es"]) {
 }
 
 const brandMarkup = html.match(/<a class="brand"[\s\S]*?<\/a>/)?.[0] ?? "";
+assert.ok(brandMarkup.includes('src="assets/trinity-grove-banner.png"'), "header brand must use the Trinity Grove banner");
 assert.ok(
-  brandMarkup.includes('src="assets/covenant-grove-banner.jpg"'),
-  "header brand must use the horizontal Covenant Grove banner"
-);
-assert.ok(
-  brandMarkup.includes('src="assets/favicon.png"'),
+  brandMarkup.includes('src="assets/trinity-grove-favicon.png"'),
   "header brand must include the compact mobile favicon"
 );
 assert.ok(!brandMarkup.includes("<span>"), "header banner must replace the duplicate text label");
+assert.ok(!html.includes("Covenant Grove"), "the former brand name must not remain in the page");
 
 console.log("site contract: all checks passed");
