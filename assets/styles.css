@@ -71,3 +71,4 @@
 .faq-list summary:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
 @media (max-width:900px){.journey-grid{grid-template-columns:repeat(2,1fr)}.status-grid,.faq-layout{grid-template-columns:1fr;gap:45px}.trust-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:600px){.journey-grid,.audience-grid,.trust-grid{grid-template-columns:1fr}.journey-step,.trust-card{min-height:auto}.journey-step>span,.trust-card>span{margin-bottom:30px}.audience-card{min-height:auto}.faq-list summary{font-size:20px}}
+.product-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:30px}.product-actions .button{margin-top:0}
